@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% block title %}Калькулятор{% endblock %}
+{% block content %}
+<div class="container px-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xl-10">
+      <header class="text-center text-md-start mb-4">
+        <h1 class="display-6 fw-bold text-success d-flex flex-wrap align-items-center gap-2 justify-content-center justify-content-md-start">
+          <i data-lucide="calculator" class="hg-icon text-success" style="width:2.5rem;height:2.5rem" aria-hidden="true"></i>
+          <span>Калькулятор здоровья</span>
+        </h1>
+        <p class="text-secondary mb-2 col-lg-9">
+          Индекс массы тела (ИМТ) и приблизительная суточная норма калорий по формуле <strong>Миффлина — Сан Жеора</strong>
+          с учётом уровня физической активности (коэффициенты как в классических таблицах диетологии).
+        </p>
+        <p class="small text-muted mb-0 col-lg-10">
+          ИМТ не различает мышцы и жир; BMR и TDEE — оценки для «среднего» человека. Беременность, гормональные состояния,
+          лекарства и хронические болезни сдвигают метаболизм. Результат не заменяет консультацию врача или диетолога.
+          <strong>С 10 до 17 лет</strong> показывается число ИМТ без взрослой категории «норма/лишний вес» и предупреждение о детских кривых; калории — только грубый ориентир.
+        </p>
+      </header>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card calculator-card h-100">
+            <div class="card-body p-4">
+              <h2 class="h5 mb-4 d-flex align-items-center gap-2">
+                <i data-lucide="keyboard" class="hg-icon text-success" aria-hidden="true"></i>Ваши данные
+              </h2>
+              <form id="calcForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                  <label class="form-label" for="sex">Пол</label>
+                  <select class="form-select" id="sex" required>
+                    <option value="female">Женский</option>
+                    <option value="male">Мужской</option>
+                  </select>
+                  <div class="form-text">В формуле Миффлина — Сан Жеора для женщин и мужчин разные свободные члены.</div>
+                </div>
+                <div class="row g-3 mb-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="age">Возраст (лет)</label>
+                    <input type="number" class="form-control" id="age" min="10" max="100" value="30" required>
+                    <div class="form-text">От 10 лет: для несовершеннолетних оценка ИМТ — не по взрослым порогам.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label" for="height">Рост (см)</label>
+                    <input type="number" class="form-control" id="height" min="110" max="230" value="170" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="weight">Вес (кг)</label>
+                  <input type="number" class="form-control" id="weight" min="22" max="250" step="0.1" value="70" required>
+                </div>
+                <div class="mb-4">
+                  <label class="form-label" for="activity">Уровень активности</label>
+                  <select class="form-select" id="activity">
+                    <option value="1.2">Минимальная (сидячая работа, почти без тренировок)</option>
+                    <option value="1.375" selected>Лёгкая (лёгкие тренировки 1–3 раза в неделю или прогулки)</option>
+                    <option value="1.55">Умеренная (умеренные нагрузки 3–5 раз в неделю)</option>
+                    <option value="1.725">Высокая (интенсивные тренировки 6–7 раз в неделю)</option>
+                    <option value="1.9">Очень высокая (физический труд + ежедневный спорт)</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-success w-100 d-inline-flex align-items-center justify-content-center gap-2">
+                  <i data-lucide="play" class="hg-icon" aria-hidden="true"></i>Рассчитать
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card h-100 border-success border-opacity-25">
+            <div class="card-body p-4 d-flex flex-column">
+              <h2 class="h5 mb-3 d-flex align-items-center gap-2">
+                <i data-lucide="trending-up" class="hg-icon text-success" aria-hidden="true"></i>Результаты
+              </h2>
+              <div id="resultsPlaceholder" class="text-secondary flex-grow-1 d-flex align-items-center justify-content-center text-center py-5 border border-dashed rounded-3">
+                <span class="d-flex flex-column align-items-center gap-2">
+                  <i data-lucide="arrow-left" class="hg-icon" style="width:2.5rem;height:2.5rem;opacity:.6" aria-hidden="true"></i>
+                  <span>Введите данные и нажмите «Рассчитать»</span>
+                </span>
+              </div>
+              <div id="resultsBlock" class="d-none">
+                <div class="result-box p-3 mb-3">
+                  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <span class="fw-semibold d-inline-flex align-items-center gap-2"><i data-lucide="gauge" class="hg-icon" aria-hidden="true"></i>ИМТ</span>
+                    <span id="bmiValue" class="fs-4 fw-bold text-success">—</span>
+                  </div>
+                  <p id="bmiCategory" class="small text-secondary mb-0 mt-2">—</p>
+                </div>
+                <div class="result-box p-3 mb-3">
+                  <p class="small text-muted mb-1">Базовый метаболизм (BMR)</p>
+                  <p id="bmrValue" class="fs-5 fw-semibold mb-0">— ккал/день</p>
+                  <p class="small text-secondary mt-2 mb-0">Энергия в покое: дыхание, температура, работа органов — без учёта ходьбы и спорта.</p>
+                  <p id="bmrMinorNote" class="small text-warning-emphasis mt-2 mb-0 d-none">Для детей формула Миффлина — Сан Жеора менее точна: много энергии уходит на рост; цифра — только для обсуждения с педиатром.</p>
+                </div>
+                <div class="result-box p-3 mb-3">
+                  <p class="small text-muted mb-1">Поддержание веса (TDEE, ориентир)</p>
+                  <p id="tdeeValue" class="fs-5 fw-semibold text-success mb-2">— ккал/день</p>
+                  <p id="tdeeHintAdult" class="small text-secondary mb-2 d-flex gap-2">
+                    <i data-lucide="info" class="hg-icon flex-shrink-0 mt-1" aria-hidden="true"></i>
+                    <span>Мягкое снижение веса часто начинают с дефицита порядка <strong>300–500 ккал</strong> от этого значения;
+                    набор массы — небольшой профицит и силовые тренировки. Не опускайте калории резко без наблюдения специалиста.</span>
+                  </p>
+                  <p id="tdeeHintMinor" class="small alert alert-warning py-2 mb-2 d-none">
+                    Для детей и подростков суточная норма зависит от стадии роста, пола и активности. Не снижайте калорийность питания ребёнка и не назначайте «дефицит» без педиатра или детского диетолога.
+                  </p>
+                  <p id="cutValue" class="small mb-0 text-muted"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion mt-4 shadow-sm rounded-3 overflow-hidden" id="calcExplain">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#calcEx1" aria-expanded="true">
+              <i data-lucide="book-open" class="hg-icon text-success flex-shrink-0" aria-hidden="true"></i><span>Что такое ИМТ и где он ошибается</span>
+            </button>
+          </h2>
+          <div id="calcEx1" class="accordion-collapse collapse show" data-bs-parent="#calcExplain">
+            <div class="accordion-body small text-secondary">
+              <p class="mb-2">ИМТ = вес (кг) / рост (м)². Это быстрый скрининг для взрослых, но не диагноз: у спортсменов с большой мышечной массой ИМТ может попадать в зону «лишнего веса» без избытка жира.</p>
+              <p class="mb-0">У пожилых и хрупких людей «нормальный» ИМТ может сочетаться с потерей мышц. С <strong>10 до 17 лет</strong> калькулятор показывает ИМТ как число, но <strong>не</strong> присваивает взрослые категории: для оценки веса нужны росто-весовые кривые и процентили по полу и возрасту у педиатра.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#calcEx2">
+              <i data-lucide="book-open" class="hg-icon text-success flex-shrink-0" aria-hidden="true"></i><span>Формула Миффлина — Сан Жеора</span>
+            </button>
+          </h2>
+          <div id="calcEx2" class="accordion-collapse collapse" data-bs-parent="#calcExplain">
+            <div class="accordion-body small text-secondary">
+              <p class="mb-2">Мужчины: BMR = 10×вес(кг) + 6,25×рост(см) − 5×возраст(лет) + 5.</p>
+              <p class="mb-2">Женщины: BMR = 10×вес(кг) + 6,25×рост(см) − 5×возраст(лет) − 161.</p>
+              <p class="mb-0">Затем BMR умножается на коэффициент активности (от 1,2 до 1,9), чтобы получить приблизительный расход энергии за день (TDEE). У детей и подростков эта оценка особенно условна.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#calcEx3">
+              <i data-lucide="book-open" class="hg-icon text-success flex-shrink-0" aria-hidden="true"></i><span>Белки, жиры и углеводы от калорий</span>
+            </button>
+          </h2>
+          <div id="calcEx3" class="accordion-collapse collapse" data-bs-parent="#calcExplain">
+            <div class="accordion-body small text-secondary">
+              <p class="mb-2">После того как знаете ориентир по калориям, распределение макронутриентов подбирают под цель: при снижении веса часто оставляют достаточный белок (чтобы беречь мышцы), умеренные жиры и остальное — углеводы с упором на цельные источники.</p>
+              <p class="mb-0">Типичные стартовые диапазоны для взрослых при обычном питании: белок ~10–35% энергии, жиры ~20–35%, углеводы ~45–65% — точные цифры зависят от активности и медицинских ограничений.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  const form = document.getElementById('calcForm');
+  const placeholder = document.getElementById('resultsPlaceholder');
+  const block = document.getElementById('resultsBlock');
+  const bmiValue = document.getElementById('bmiValue');
+  const bmiCategory = document.getElementById('bmiCategory');
+  const bmrValue = document.getElementById('bmrValue');
+  const tdeeValue = document.getElementById('tdeeValue');
+  const cutValue = document.getElementById('cutValue');
+  const bmrMinorNote = document.getElementById('bmrMinorNote');
+  const tdeeHintAdult = document.getElementById('tdeeHintAdult');
+  const tdeeHintMinor = document.getElementById('tdeeHintMinor');
+
+  function bmiCategoryRu(bmi) {
+    if (bmi < 18.5) return 'Недостаточный вес (по ИМТ)';
+    if (bmi < 25) return 'Нормальный вес (по ИМТ)';
+    if (bmi < 30) return 'Избыточный вес (по ИМТ)';
+    return 'Ожирение (по ИМТ)';
+  }
+
+  function compute(e) {
+    e.preventDefault();
+    const sex = document.getElementById('sex').value;
+    const age = parseFloat(document.getElementById('age').value);
+    const heightCm = parseFloat(document.getElementById('height').value);
+    const weightKg = parseFloat(document.getElementById('weight').value);
+    const activity = parseFloat(document.getElementById('activity').value);
+
+    const minor = age < 18;
+    const minH = minor ? 110 : 120;
+    const minW = minor ? 22 : 35;
+
+    if (!age || age < 10 || age > 100 || !heightCm || !weightKg ||
+        heightCm < minH || heightCm > 230 || weightKg < minW || weightKg > 250) {
+      form.classList.add('was-validated');
+      return;
+    }
+
+    const hM = heightCm / 100;
+    const bmi = weightKg / (hM * hM);
+    const bmr = sex === 'male'
+      ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+      : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+    const tdee = Math.round(bmr * activity);
+    const cutLow = tdee - 500;
+    const cutHigh = tdee - 300;
+
+    placeholder.classList.add('d-none');
+    block.classList.remove('d-none');
+
+    bmiValue.textContent = bmi.toFixed(1);
+    if (minor) {
+      bmiCategory.textContent =
+        'Для детей и подростков это число не сопоставляют с взрослыми порогами 18,5–25–30. Норма веса определяется по росто-весовым кривым и процентилям (пол и точный возраст). Показатель выше — только справочно; интерпретацию доверьте педиатру.';
+    } else {
+      bmiCategory.textContent = bmiCategoryRu(bmi);
+    }
+
+    bmrValue.textContent = Math.round(bmr) + ' ккал/день';
+    tdeeValue.textContent = tdee + ' ккал/день';
+
+    bmrMinorNote.classList.toggle('d-none', !minor);
+    tdeeHintAdult.classList.toggle('d-none', minor);
+    tdeeHintMinor.classList.toggle('d-none', !minor);
+
+    if (minor) {
+      cutValue.textContent =
+        'Снижение калорий и «диеты для похудения» у несовершеннолетних назначает только врач. Приведённый TDEE — очень грубый ориентир, не руководство к изменению рациона.';
+    } else {
+      cutValue.textContent =
+        'Пример дефицита для похудения: примерно ' + cutLow + '–' + cutHigh + ' ккал/день (не как медицинское назначение).';
+    }
+
+    if (typeof window.hgRefreshIcons === 'function') {
+      window.hgRefreshIcons();
+    }
+  }
+
+  form.addEventListener('submit', compute);
+})();
+</script>
+{% endblock %}

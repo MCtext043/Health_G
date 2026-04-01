@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %}Продукты{% endblock %}
+{% block content %}
+<div class="container px-4">
+  <header class="text-center text-md-start mb-4 mb-md-5">
+    <h1 class="display-6 fw-bold text-success d-flex flex-wrap align-items-center gap-2 justify-content-center justify-content-md-start">
+      <i data-lucide="shopping-basket" class="hg-icon text-success" style="width:2.5rem;height:2.5rem" aria-hidden="true"></i>
+      <span>Продукты для здорового рациона</span>
+    </h1>
+    <p class="lead text-secondary mb-2 col-lg-10">
+      Ниже — ознакомительный справочник цельных продуктов с краткими фактами и советами по употреблению.
+      Цифры и порции — ориентиры, а не персональное назначение; аллергии, болезни и лекарства учитывает только врач или диетолог.
+    </p>
+    <p class="small text-muted mb-0 d-inline-flex align-items-start gap-2 justify-content-center justify-content-md-start">
+      <i data-lucide="mouse-pointer-click" class="hg-icon flex-shrink-0 mt-1" aria-hidden="true"></i>
+      <span>Нажмите на строку в списке — откроется окно с подробным описанием.</span>
+    </p>
+  </header>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header bg-success text-white py-3 d-flex align-items-center gap-2">
+          <i data-lucide="list" class="hg-icon" style="width:1.25rem;height:1.25rem" aria-hidden="true"></i>
+          <span>Список продуктов</span>
+        </div>
+        <div class="list-group list-group-flush" id="productList">
+          {% for p in products %}
+          <button type="button"
+                  class="list-group-item list-group-item-action product-row d-flex align-items-start gap-3 py-3 text-start"
+                  data-bs-toggle="modal"
+                  data-bs-target="#productModal"
+                  data-product-index="{{ loop.index0 }}"
+                  aria-haspopup="dialog">
+            <span class="icon-tile flex-shrink-0 d-inline-flex align-items-center justify-content-center">
+              <i data-lucide="{{ p.icon }}" class="hg-icon" aria-hidden="true"></i>
+            </span>
+            <span class="flex-grow-1 min-w-0">
+              <span class="fw-semibold d-block">{{ p.name }}</span>
+              <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">{{ p.category }}</span>
+              <span class="d-block small text-secondary mt-1">{{ p.preview }}</span>
+            </span>
+            <i data-lucide="chevron-right" class="hg-icon text-secondary flex-shrink-0 mt-2 d-none d-sm-block" aria-hidden="true"></i>
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <aside class="col-lg-4">
+      <div class="card border-success border-opacity-25 h-100">
+        <div class="card-body">
+          <h2 class="h6 text-success text-uppercase letter-spacing mb-3 d-flex align-items-center gap-2">
+            <i data-lucide="lightbulb" class="hg-icon" aria-hidden="true"></i>Как пользоваться списком
+          </h2>
+          <ul class="small text-secondary ps-3 mb-4">
+            <li class="mb-2">Выбирайте продукты из разных групп: овощи, белок, цельные зёрна, жиры.</li>
+            <li class="mb-2">Один продукт не «лечит» и не заменяет рацион целиком — важен баланс недели.</li>
+            <li class="mb-2">Смотрите состав на упаковке: сахар, соль и масло часто добавляют в готовые блюда.</li>
+            <li>При диабете, БСР, беременности и детском питании ориентиры корректирует специалист.</li>
+          </ul>
+          <a href="{{ url_for('about_nutrition') }}" class="btn btn-outline-success btn-sm w-100 mb-2 d-inline-flex align-items-center justify-content-center gap-2">
+            <i data-lucide="book-open" class="hg-icon" aria-hidden="true"></i>К разделу «О питании»
+          </a>
+          <a href="{{ url_for('calculator') }}" class="btn btn-outline-secondary btn-sm w-100 d-inline-flex align-items-center justify-content-center gap-2">
+            <i data-lucide="calculator" class="hg-icon" aria-hidden="true"></i>К калькулятору калорий
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-success border-opacity-25">
+        <div class="d-flex align-items-center gap-2 me-auto pe-2">
+          <span class="icon-tile d-inline-flex align-items-center justify-content-center" id="productModalIconWrap"></span>
+          <div>
+            <h2 class="modal-title h5 mb-0" id="productModalTitle">Продукт</h2>
+            <span class="badge bg-success bg-opacity-10 text-success mt-1" id="productModalCategory"></span>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary" id="productModalDesc"></p>
+        <h3 class="h6 text-success mt-3 d-flex align-items-center gap-2">
+          <i data-lucide="list-checks" class="hg-icon" aria-hidden="true"></i>На заметку
+        </h3>
+        <ul class="small mb-3" id="productModalFacts"></ul>
+        <div class="result-box p-3 small mb-0" id="productModalHintWrap">
+          <strong class="d-flex align-items-center gap-2 text-success mb-1">
+            <i data-lucide="ruler" class="hg-icon" aria-hidden="true"></i>Порции и применение
+          </strong>
+          <span id="productModalHint"></span>
+        </div>
+      </div>
+      <div class="modal-footer border-0 pt-0">
+        <button type="button" class="btn btn-success d-inline-flex align-items-center gap-2" data-bs-dismiss="modal">
+          <i data-lucide="check" class="hg-icon" aria-hidden="true"></i>Понятно
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  const PRODUCTS = {{ products | tojson }};
+  const modalEl = document.getElementById('productModal');
+  const titleEl = document.getElementById('productModalTitle');
+  const catEl = document.getElementById('productModalCategory');
+  const descEl = document.getElementById('productModalDesc');
+  const factsEl = document.getElementById('productModalFacts');
+  const hintEl = document.getElementById('productModalHint');
+  const iconWrap = document.getElementById('productModalIconWrap');
+
+  function escapeAttr(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  modalEl.addEventListener('show.bs.modal', function (event) {
+    const btn = event.relatedTarget;
+    if (!btn || btn.getAttribute('data-product-index') == null) return;
+    const idx = parseInt(btn.getAttribute('data-product-index'), 10);
+    const p = PRODUCTS[idx];
+    if (!p) return;
+
+    titleEl.textContent = p.name;
+    catEl.textContent = p.category;
+    descEl.textContent = p.description;
+    hintEl.textContent = p.hint || '';
+
+    const iconName = p.icon || 'shopping-basket';
+    iconWrap.innerHTML = '<i class="hg-icon" data-lucide="' + escapeAttr(iconName) + '" aria-hidden="true"></i>';
+
+    factsEl.innerHTML = '';
+    (p.facts || []).forEach(function (line) {
+      const li = document.createElement('li');
+      li.textContent = line;
+      factsEl.appendChild(li);
+    });
+
+    if (typeof window.hgRefreshIcons === 'function') {
+      window.hgRefreshIcons();
+    }
+  });
+})();
+</script>
+{% endblock %}

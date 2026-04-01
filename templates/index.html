@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<div class="hero-section py-5 mb-4 mb-md-5">
+  <div class="container px-4">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-7">
+        <h1 class="display-5 fw-bold mb-3">Здоровое питание — основа энергии и самочувствия</h1>
+        <p class="lead opacity-90 mb-3">
+          Сбалансированный рацион, достаточная вода и регулярные приёмы пищи помогают поддерживать вес,
+          иммунитет и ясность мысли. Этот сайт собирает обобщённые принципы, справочник продуктов и калькулятор
+          ориентиров — без замены очной консультации врача.
+        </p>
+        <p class="small opacity-75 mb-4 d-none d-md-block">
+          ВОЗ и национальные рекомендации сходятся в главном: больше овощей и цельных злаков, достаточный белок,
+          умеренные полезные жиры и контроль соли, сахара и ультрапереработки.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="{{ url_for('about_nutrition') }}" class="btn btn-light btn-lg d-inline-flex align-items-center gap-2">
+            <i data-lucide="book-open" class="hg-icon" aria-hidden="true"></i>Читать о питании
+          </a>
+          <a href="{{ url_for('products') }}" class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2">
+            <i data-lucide="apple" class="hg-icon" aria-hidden="true"></i>Продукты
+          </a>
+          <a href="{{ url_for('calculator') }}" class="btn btn-outline-light btn-lg d-inline-flex align-items-center gap-2">
+            <i data-lucide="calculator" class="hg-icon" aria-hidden="true"></i>Калькулятор
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center d-none d-md-block">
+        <i data-lucide="heart-pulse" class="hg-icon-hero text-white opacity-75 d-inline-block" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-4 pb-3">
+  <h2 class="h4 text-success mb-4 text-center text-md-start">С чего начать</h2>
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 p-4">
+        <div class="mb-3"><span class="icon-tile"><i data-lucide="layout-grid" class="hg-icon" aria-hidden="true"></i></span></div>
+        <h3 class="h5 card-title">Разнообразие</h3>
+        <p class="card-text text-secondary small mb-2">
+          Овощи, цельнозерновые, белок, полезные жиры — чем шире «палитра» продуктов, тем проще получить витамины и микроэлементы без монотонности.
+        </p>
+        <p class="card-text text-secondary small mb-0">
+          Стремитесь к «радуге» на тарелке: красные томаты, зелёная зелень, жёлтый перец, фиолетовая капуста — у каждого цвета свой набор фитонутриентов.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 p-4">
+        <div class="mb-3"><span class="icon-tile"><i data-lucide="droplets" class="hg-icon" aria-hidden="true"></i></span></div>
+        <h3 class="h5 card-title">Вода и напитки</h3>
+        <p class="card-text text-secondary small mb-2">
+          Пейте в течение дня, не дожидаясь сильной жажды. Вода участвует в обмене веществ, доставке нутриентов и терморегуляции.
+        </p>
+        <p class="card-text text-secondary small mb-0">
+          Сладкие газировки и соки дают много «пустых» калорий; чай и кофе без сахара — в умеренных количествах — дополняют режим, но не заменяют воду полностью.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+      <div class="card h-100 p-4">
+        <div class="mb-3"><span class="icon-tile"><i data-lucide="clock" class="hg-icon" aria-hidden="true"></i></span></div>
+        <h3 class="h5 card-title">Режим и осознанность</h3>
+        <p class="card-text text-secondary small mb-2">
+          Регулярные приёмы пищи снижают перепады сахара в крови и помогают не переедать вечером после длинных перерывов.
+        </p>
+        <p class="card-text text-secondary small mb-0">
+          Ешьте без отвлечения на экран по возможности: это улучшает сигналы сытости. Сон 7–9 часов связан с лучшим контролем аппетита у многих людей.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-4 pb-4">
+  <div class="row g-4 align-items-stretch">
+    <div class="col-md-6">
+      <div class="card h-100 bg-light border-0 p-4">
+        <h3 class="h5 text-success mb-3 d-flex align-items-center gap-2">
+          <i data-lucide="trending-up" class="hg-icon text-success" aria-hidden="true"></i>Что такое сбалансированный день
+        </h3>
+        <p class="small text-secondary mb-2">
+          Упрощённая схема: завтрак с белком и клетчаткой (овсянка + яйцо или йогурт + ягоды), обед с овощами и источником белка,
+          ужин чуть легче по калориям, если вы мало двигаетесь вечером. Перекусы — фрукт, орехи, овощи с хумусом.
+        </p>
+        <p class="small text-secondary mb-0">
+          Точные граммы и калории зависят от целей (вес, спорт, болезни). Раздел «Калькулятор» даёт лишь стартовый ориентир по энергозатратам.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100 border-success border-opacity-25 p-4">
+        <h3 class="h5 text-success mb-3 d-flex align-items-center gap-2">
+          <i data-lucide="shield-alert" class="hg-icon text-success" aria-hidden="true"></i>Когда нужен врач
+        </h3>
+        <ul class="small text-secondary mb-0 ps-3">
+          <li class="mb-1">Непреднамеренная потеря или набор веса, постоянная усталость после еды.</li>
+          <li class="mb-1">Подозрение на аллергию, непереносимость, боли в животе.</li>
+          <li>Диабет, болезни почек, печени, ЖКТ — любые диеты только по плану специалиста.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

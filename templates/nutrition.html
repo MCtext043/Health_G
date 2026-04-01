@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}О здоровом питании{% endblock %}
+{% block content %}
+<div class="container px-4">
+  <header class="text-center text-md-start mb-4 mb-md-5">
+    <h1 class="display-6 fw-bold text-success d-flex flex-wrap align-items-center gap-2 justify-content-center justify-content-md-start">
+      <i data-lucide="notebook-text" class="hg-icon text-success" style="width:2.5rem;height:2.5rem" aria-hidden="true"></i>
+      <span>Основы здорового питания</span>
+    </h1>
+    <p class="lead text-secondary mb-2 col-lg-10">
+      Ниже — обобщённые рекомендации ВОЗ, принципы сбалансированного рациона и практические подсказки на каждый день.
+      Индивидуальная норма зависит от возраста, пола, активности, климата и состояния здоровья.
+    </p>
+    <p class="small text-muted mb-0 col-lg-9">
+      Материал не является медицинской услугой. Детям, беременным, спортсменам и людям с диагнозами нужен персональный план у диетолога или врача.
+    </p>
+  </header>
+
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-body p-4">
+          <h2 class="h5 card-title d-flex align-items-center gap-2">
+            <i data-lucide="pie-chart" class="hg-icon text-success" aria-hidden="true"></i>Пропорции на тарелке
+          </h2>
+          <p class="small text-secondary mb-3">
+            Визуальное правило «здоровой тарелки» помогает без взвешивания каждого приёма: сначала наполняйте половину овощами, затем добавляйте белок и крупу.
+          </p>
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex gap-2 mb-2"><i data-lucide="circle-check" class="hg-icon text-success flex-shrink-0 mt-1" aria-hidden="true"></i><span><strong>Половина</strong> — овощи и зелень (сырые, тушёные, запечённые). Заморозка и консервация без лишней соли и сахара тоже подходят.</span></li>
+            <li class="d-flex gap-2 mb-2"><i data-lucide="circle-check" class="hg-icon text-success flex-shrink-0 mt-1" aria-hidden="true"></i><span><strong>Четверть</strong> — белок: рыба, бобовые, нежирное мясо, птица без кожи, яйца, тофу, творог.</span></li>
+            <li class="d-flex gap-2"><i data-lucide="circle-check" class="hg-icon text-success flex-shrink-0 mt-1" aria-hidden="true"></i><span><strong>Четверть</strong> — сложные углеводы: гречка, бурый рис, киноа, цельнозерновой хлеб, картофель «в мундире».</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-body p-4">
+          <h2 class="h5 card-title d-flex align-items-center gap-2">
+            <i data-lucide="shield-check" class="hg-icon text-success" aria-hidden="true"></i>Что ограничить
+          </h2>
+          <p class="text-secondary small mb-2">
+            Избыток соли, свободных сахаров и промышленно переработанных трансжиров повышает риски для давления, сердца и обмена веществ.
+          </p>
+          <ul class="list-unstyled mb-3 small text-secondary">
+            <li class="mb-2 d-flex gap-2"><i data-lucide="circle-minus" class="hg-icon text-warning flex-shrink-0 mt-1" aria-hidden="true"></i><span><strong>Соль</strong> — ориентир ВОЗ до ~5 г в сутки (включая скрытую соль в хлебе, сырах, соусах). Вкус постепенно «привыкает» к менее солёному.</span></li>
+            <li class="mb-2 d-flex gap-2"><i data-lucide="circle-minus" class="hg-icon text-warning flex-shrink-0 mt-1" aria-hidden="true"></i><span><strong>Свободные сахара</strong> — сиропы, кондитерка, сладкие напитки; ВОЗ рекомендует держать долю низкой (ориентир часто ≤10% энергии, «идеал» ниже).</span></li>
+            <li class="mb-2 d-flex gap-2"><i data-lucide="circle-minus" class="hg-icon text-warning flex-shrink-0 mt-1" aria-hidden="true"></i><span><strong>Насыщенные жиры</strong> — жирное мясо, сливочное масло в больших количествах; частично заменяйте на растительные масла, рыбу, орехи.</span></li>
+            <li class="d-flex gap-2"><i data-lucide="circle-minus" class="hg-icon text-warning flex-shrink-0 mt-1" aria-hidden="true"></i><span><strong>Ультрапереработка</strong> — продукты с длинным списком ингредиентов и «неузнаваемыми» добавками; чаще готовьте из простых продуктов.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body p-4">
+          <h2 class="h5 card-title d-flex align-items-center gap-2 mb-3">
+            <i data-lucide="zap" class="hg-icon text-success" aria-hidden="true"></i>Клетчатка, витамины и минералы
+          </h2>
+          <p class="small text-secondary col-lg-10 mb-3">
+            Микронутриенты не «заменяют» калории, но без них страдают иммунитет, кости, зрение, нервная система и энергия. Разнообразие продуктов надёжнее любой одной «супер еды».
+          </p>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="border rounded-3 p-3 h-100 bg-light">
+                <i data-lucide="clover" class="hg-icon text-success d-block mb-2" style="width:2rem;height:2rem" aria-hidden="true"></i>
+                <strong class="d-block small">Клетчатка</strong>
+                <span class="small text-secondary">Овощи, фрукты, бобовые, цельные зёрна поддерживают микрофлору, сытость и мягкий гликемический отклик. Нормы в странах различаются; обычно рекомендуют постепенно увеличивать потребление с водой.</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="border rounded-3 p-3 h-100 bg-light">
+                <i data-lucide="pill" class="hg-icon text-success d-block mb-2" style="width:2rem;height:2rem" aria-hidden="true"></i>
+                <strong class="d-block small">Витамины</strong>
+                <span class="small text-secondary">Разноцветные овощи и фрукты дают витамины C, A (каротиноиды), фолат. Витамин D в еде ограничен — солнце и назначения врача; B12 — в животных продуктах или добавках при веганстве.</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="border rounded-3 p-3 h-100 bg-light">
+                <i data-lucide="activity" class="hg-icon text-success d-block mb-2" style="width:2rem;height:2rem" aria-hidden="true"></i>
+                <strong class="d-block small">Минералы</strong>
+                <span class="small text-secondary">Кальций — молочные продукты, тофу, зелень; железо — мясо, бобовые + витамин C; магний — орехи, крупы, какао. Не назначайте мегадозы без анализов.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card h-100 border-success border-opacity-25">
+        <div class="card-body p-4">
+          <h2 class="h5 card-title text-success mb-3 d-flex align-items-center gap-2">
+            <i data-lucide="beef" class="hg-icon text-success" aria-hidden="true"></i>Белок и жиры
+          </h2>
+          <p class="small text-secondary mb-2">
+            Белок нужен для мышц, ферментов и иммунитета. Ориентир для взрослых часто ~0,8–1 г на кг массы тела в день; при силовых тренировках и старости потребности могут быть выше — уточняйте индивидуально.
+          </p>
+          <p class="small text-secondary mb-0">
+            Жиры не «враги»: омега-3 из рыбы, мононенасыщенные из оливкового масла и авокадо поддерживают сердце и усвоение витаминов A, D, E, K. Трансжиры из фастфуда и части выпечки — по возможности минимум.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-body p-4">
+          <h2 class="h5 card-title text-success mb-3 d-flex align-items-center gap-2">
+            <i data-lucide="coffee" class="hg-icon text-success" aria-hidden="true"></i>Фрукты, порции и снеки
+          </h2>
+          <p class="small text-secondary mb-2">
+            Фрукты дают витамины и клетчатку, но также фруктозу. Для большинства людей 1–2 порции в день в рамках сбалансированного рациона — разумно; при диабете — подсчёт углеводов с врачом.
+          </p>
+          <p class="small text-secondary mb-0">
+            Полезные перекусы: горсть не солёных орехов, ягоды с йогуртом, овощи с бобовой пастой, цельнозерновой хлеб с авокадо. Избегайте «бессмысленного» перекуса из сахара без белка — он быстро вызывает новый голод.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="accordion accordion-flush shadow-sm rounded-3 overflow-hidden" id="nutriFaq">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutriFaq1" aria-expanded="true">
+              <i data-lucide="circle-help" class="hg-icon text-success flex-shrink-0" aria-hidden="true"></i><span>Нужно ли считать каждую калорию?</span>
+            </button>
+          </h2>
+          <div id="nutriFaq1" class="accordion-collapse collapse show" data-bs-parent="#nutriFaq">
+            <div class="accordion-body small text-secondary">
+              Не обязательно пожизненно. Для многих достаточно правила тарелки, регулярных приёмов пищи и разумных порций.
+              Подсчёт калорий полезен как краткий этап осознанности или по рекомендации диетолога при конкретной цели.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutriFaq2">
+              <i data-lucide="circle-help" class="hg-icon text-success flex-shrink-0" aria-hidden="true"></i><span>Вегетарианство и веганство — это здорово автоматически?</span>
+            </button>
+          </h2>
+          <div id="nutriFaq2" class="accordion-collapse collapse" data-bs-parent="#nutriFaq">
+            <div class="accordion-body small text-secondary">
+              Не всегда: важен состав рациона. Веганы должны планировать B12, железо, омега-3, кальций, цинк и белок.
+              Рафинированная выпечка и фастфуд бывают и в веганском исполнении — они не делают рацион «здоровым» сами по себе.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed d-flex align-items-center gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#nutriFaq3">
+              <i data-lucide="circle-help" class="hg-icon text-success flex-shrink-0" aria-hidden="true"></i><span>Что важнее — продукты или время приёма пищи?</span>
+            </button>
+          </h2>
+          <div id="nutriFaq3" class="accordion-collapse collapse" data-bs-parent="#nutriFaq">
+            <div class="accordion-body small text-secondary">
+              В первую очередь суммарное качество и количество за день и неделю. Окна питания и интервальное голодание работают не у всех одинаково;
+              при диабете, беременности и расстройствах пищевого поведения такие схемы обсуждают со специалистом.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2 mt-5 mb-2">
+    <a href="{{ url_for('products') }}" class="btn btn-success btn-lg d-inline-flex align-items-center gap-2">
+      <i data-lucide="shopping-basket" class="hg-icon" aria-hidden="true"></i>Справочник продуктов
+    </a>
+    <a href="{{ url_for('calculator') }}" class="btn btn-outline-success btn-lg d-inline-flex align-items-center gap-2">
+      <i data-lucide="calculator" class="hg-icon" aria-hidden="true"></i>Калькулятор калорий
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+:root {
+  --hg-leaf: #2d6a4f;
+  --hg-leaf-dark: #1b4332;
+  --hg-cream: #f8f9f2;
+  --hg-accent: #40916c;
+  --hg-warm: #d8f3dc;
+}
+
+/* Lucide: stroke-иконки, цвет как у текста */
+.hg-icon {
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.2em;
+  stroke-width: 2;
+}
+
+.hg-icon-nav {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.hg-icon-footer {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.2rem;
+}
+
+.hg-icon-hero {
+  width: clamp(3.5rem, 12vw, 5.5rem);
+  height: clamp(3.5rem, 12vw, 5.5rem);
+  stroke-width: 1.5;
+}
+
+.icon-tile svg,
+.icon-tile .hg-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-tile svg {
+  stroke-width: 2;
+}
+
+.text-success svg,
+.text-success .hg-icon {
+  stroke: currentColor;
+}
+
+.navbar-dark .nav-link svg,
+.navbar-dark .navbar-brand svg {
+  stroke: rgba(255, 255, 255, 0.95);
+}
+
+.card-header.bg-success svg,
+.card-header.bg-success .hg-icon {
+  stroke: #fff;
+}
+
+.btn .hg-icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(165deg, var(--hg-cream) 0%, #eef5ef 45%, #fff 100%);
+  min-height: 100vh;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, var(--hg-leaf-dark) 0%, var(--hg-leaf) 50%, var(--hg-accent) 100%);
+  color: #fff;
+  border-radius: 0 0 1.5rem 1.5rem;
+  box-shadow: 0 0.5rem 2rem rgba(27, 67, 50, 0.25);
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    border-radius: 0 0 2rem 2rem;
+  }
+}
+
+.icon-tile {
+  width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--hg-warm);
+  color: var(--hg-leaf-dark);
+  font-size: 1.35rem;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 0.125rem 0.75rem rgba(27, 67, 50, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.35rem 1.25rem rgba(27, 67, 50, 0.12);
+}
+
+footer {
+  margin-top: auto;
+}
+
+.calculator-card .form-label {
+  font-weight: 500;
+  color: var(--hg-leaf-dark);
+}
+
+.result-box {
+  background: var(--hg-warm);
+  border-left: 4px solid var(--hg-accent);
+  border-radius: 0.5rem;
+}
+
+.product-row:focus {
+  z-index: 1;
+}
+
+#productModal .icon-tile {
+  background: var(--hg-warm);
+}
+
+#productModal .icon-tile svg {
+  stroke: var(--hg-leaf-dark);
+}
